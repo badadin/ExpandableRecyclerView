@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ExpandableRecyclerView</string>
+
+    <string name="click_to_expand">Click to expand</string>
+    <string name="click_to_collapse">Click to collapse</string>
+
+</resources>
