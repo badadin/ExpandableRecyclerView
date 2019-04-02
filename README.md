@@ -3,9 +3,7 @@ This is a very simple example of how the expandable RecyclerView can be implemen
 
 <br/>
 
-![](animation.gif)
-
-<br/>
+<img src="animation.gif" width="400" />
 
 </br>
 
