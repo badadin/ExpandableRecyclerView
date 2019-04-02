@@ -7,7 +7,8 @@ This is a very simple example of how the expandable RecyclerView can be implemen
 
 </br>
 
-## MIT License
+## License
+MIT License
 
 Copyright (c) 2019 Rinat Vasilev
 
