@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">ExpandableRecyclerView</string>
+    <string name="simple">Simple</string>
+    <string name="selectable">Selectable</string>
+    <string name="only_one_opened">Only one opened</string>
+    <string name="affecting_other_childs">Affecting other childs</string>
+    <string name="nodes">Nodes</string>
 
     <string name="click_to_expand">Click to expand</string>
     <string name="click_to_collapse">Click to collapse</string>

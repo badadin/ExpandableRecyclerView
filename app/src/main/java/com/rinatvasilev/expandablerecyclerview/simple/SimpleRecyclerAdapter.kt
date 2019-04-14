@@ -1,11 +1,13 @@
-package com.rinatvasilev.expandablerecyclerview
+package com.rinatvasilev.expandablerecyclerview.simple
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.rinatvasilev.expandablerecyclerview.R
+import com.rinatvasilev.expandablerecyclerview.inflate
 
-class RecyclerAdapter(private val itemList: ArrayList<Item>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class SimpleRecyclerAdapter(private val itemList: ArrayList<Item>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemCount() = itemList.size
 
@@ -15,7 +17,8 @@ class RecyclerAdapter(private val itemList: ArrayList<Item>) : RecyclerView.Adap
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            CHILD -> ChildViewHolder(parent.inflate(R.layout.item_child, false))
+            CHILD -> ChildViewHolder(parent.inflate(
+                R.layout.item_child, false))
             else -> ParentViewHolder(parent.inflate(R.layout.item_parent, false))
         }
     }
