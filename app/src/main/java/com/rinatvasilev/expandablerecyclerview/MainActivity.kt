@@ -4,7 +4,10 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.widget.RadioButton
-import com.rinatvasilev.expandablerecyclerview.simple.SimpleListFragment
+import com.rinatvasilev.expandablerecyclerview.affectingotherchilds.AffectingOtherChildsFragment
+import com.rinatvasilev.expandablerecyclerview.onlyoneopened.OnlyOneOpenedFragment
+import com.rinatvasilev.expandablerecyclerview.selectable.SelectableFragment
+import com.rinatvasilev.expandablerecyclerview.simple.SimpleFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -74,12 +77,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun getFragment(key: String): Fragment {
         return when (key) {
-            SIMPLE -> SimpleListFragment.getInstance()
-            SELECTABLE -> SimpleListFragment.getInstance()
-            ONLY_ONE_OPENED -> SimpleListFragment.getInstance()
-            AFFECTING_OTHER_CHILDS -> SimpleListFragment.getInstance()
-            NODES -> SimpleListFragment.getInstance()
-            else -> SimpleListFragment.getInstance()
+            SIMPLE -> SimpleFragment.getInstance()
+            SELECTABLE -> SelectableFragment.getInstance()
+            ONLY_ONE_OPENED -> OnlyOneOpenedFragment.getInstance()
+            AFFECTING_OTHER_CHILDS -> AffectingOtherChildsFragment.getInstance()
+            NODES -> SimpleFragment.getInstance()
+            else -> SimpleFragment.getInstance()
         }
     }
 

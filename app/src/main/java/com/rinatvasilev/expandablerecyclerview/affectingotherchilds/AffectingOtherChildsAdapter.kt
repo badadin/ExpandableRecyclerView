@@ -1,13 +1,15 @@
-package com.rinatvasilev.expandablerecyclerview.simple
+package com.rinatvasilev.expandablerecyclerview.affectingotherchilds
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.rinatvasilev.expandablerecyclerview.R
-import com.rinatvasilev.expandablerecyclerview.inflate
+import com.rinatvasilev.expandablerecyclerview.*
 
-class SimpleRecyclerAdapter(private val itemList: ArrayList<Item>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class AffectingOtherChildsAdapter(private val itemList: ArrayList<Item>) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    private var currentOpenedParent: Parent? = null
 
     override fun getItemCount() = itemList.size
 
@@ -17,8 +19,11 @@ class SimpleRecyclerAdapter(private val itemList: ArrayList<Item>) : RecyclerVie
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            CHILD -> ChildViewHolder(parent.inflate(
-                R.layout.item_child, false))
+            CHILD -> ChildViewHolder(
+                parent.inflate(
+                    R.layout.item_child, false
+                )
+            )
             else -> ParentViewHolder(parent.inflate(R.layout.item_parent, false))
         }
     }
@@ -49,10 +54,23 @@ class SimpleRecyclerAdapter(private val itemList: ArrayList<Item>) : RecyclerVie
                     itemList.removeAll(parentItem.childItems)
                     notifyItemRangeRemoved(startPosition, count)
                     parentItem.isExpanded = false
+                    currentOpenedParent = null
                 } else {
                     itemList.addAll(startPosition, parentItem.childItems)
                     notifyItemRangeInserted(startPosition, count)
                     parentItem.isExpanded = true
+
+                    if (currentOpenedParent != null) {
+                        itemList.removeAll(currentOpenedParent!!.childItems)
+                        notifyItemRangeRemoved(
+                            itemList.indexOf(currentOpenedParent!!) + 1,
+                            currentOpenedParent!!.childItems.size
+                        )
+                        currentOpenedParent?.isExpanded = false
+                        notifyItemChanged(itemList.indexOf(currentOpenedParent!!))
+                    }
+
+                    currentOpenedParent = parentItem
                 }
                 updateViewState()
             }
@@ -67,6 +85,11 @@ class SimpleRecyclerAdapter(private val itemList: ArrayList<Item>) : RecyclerVie
         }
 
         private fun updateViewState() {
+            if (parentItem.selectedChild != null) {
+                title.text = parentItem.selectedChild?.title
+                return
+            }
+
             if (parentItem.isExpanded) {
                 title.text = itemView.context.getString(R.string.click_to_collapse)
             } else {
@@ -77,6 +100,22 @@ class SimpleRecyclerAdapter(private val itemList: ArrayList<Item>) : RecyclerVie
 
     inner class ChildViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+        init {
+            itemView.setOnClickListener {
+                val parentPosition = itemList.indexOf(childItem.parent)
+                val startPosition = parentPosition + 1
+                val count = childItem.parent.childItems.size
+
+                itemList.removeAll(childItem.parent.childItems)
+                notifyItemRangeRemoved(startPosition, count)
+                childItem.parent.isExpanded = false
+
+                childItem.parent.selectedChild = childItem
+
+                notifyItemChanged(parentPosition)
+            }
+        }
+
         lateinit var childItem: Child
 
         private val title: TextView = itemView.findViewById(R.id.title)
@@ -84,10 +123,5 @@ class SimpleRecyclerAdapter(private val itemList: ArrayList<Item>) : RecyclerVie
         fun bind() {
             title.text = childItem.title
         }
-    }
-
-    companion object {
-        const val PARENT = 0
-        const val CHILD = 1
     }
 }

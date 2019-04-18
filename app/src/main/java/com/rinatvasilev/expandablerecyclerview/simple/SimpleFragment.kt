@@ -6,12 +6,15 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.rinatvasilev.expandablerecyclerview.Child
+import com.rinatvasilev.expandablerecyclerview.Item
+import com.rinatvasilev.expandablerecyclerview.Parent
 import com.rinatvasilev.expandablerecyclerview.R
 
-class SimpleListFragment : Fragment() {
+class SimpleFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.fragment_simple_list, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_list, container, false)
 
         //some predefined values:
         val parent1 = Parent(0)
@@ -50,12 +53,12 @@ class SimpleListFragment : Fragment() {
         itemList.add(parent3)
 
         val list = rootView.findViewById<RecyclerView>(R.id.list)
-        list.adapter = SimpleRecyclerAdapter(itemList)
+        list.adapter = SimpleAdapter(itemList)
 
         return rootView
     }
 
     companion object {
-        fun getInstance() = SimpleListFragment()
+        fun getInstance() = SimpleFragment()
     }
 }

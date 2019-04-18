@@ -17,4 +17,15 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Text" />
 
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:textColor="@color/title_text"
+        android:textSize="20sp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="price" />
+
 </android.support.constraint.ConstraintLayout>
