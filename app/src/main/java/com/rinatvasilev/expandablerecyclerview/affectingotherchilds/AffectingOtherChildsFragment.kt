@@ -22,15 +22,15 @@ class AffectingOtherChildsFragment : Fragment() {
 
         val balance = 1000
 
-        available.text = balance.toString()
-        selected.text = "0"
+        available.text = "Available: $balance"
+        selected.text = "Selected: 0"
 
         val list = rootView.findViewById<RecyclerView>(R.id.list)
         list.adapter = AffectingOtherChildsAdapter(
             balance,
             getPredefinedValues(),
             selectedListener = { sum ->
-                selected.text = sum.toString()
+                selected.text = "Selected: $sum"
             })
 
         return rootView
