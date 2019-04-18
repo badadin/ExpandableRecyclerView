@@ -26,21 +26,19 @@ data class Child(
 
 data class Node(val id: Long, val parent: Node?) {
 
-    //var parent: Node? = null
     var isExpanded = false
-    //var nestingLevel = 0
-    val childItems = ArrayList<Node>()
+    val childList = ArrayList<Node>()
+    var nestingLevel = 0
 
-    fun isRoot() = parent == null
+    init {
+        calculateNestingLevel()
+    }
 
-    //fixme оптимизировать, чтобы посчитать один раз
-    fun calculateNestingLevel(): Int {
-        var level = 0
-        var nextParent = parent
-        while (nextParent != null) {
-            nextParent = nextParent.parent
-            level++
+    private fun calculateNestingLevel() {
+        var current = parent
+        while (current != null) {
+            nestingLevel++
+            current = current.parent
         }
-        return level
     }
 }

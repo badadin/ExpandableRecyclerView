@@ -122,6 +122,8 @@ class AffectingOtherChildsAdapter(
             //todo доделать
             //todo 1. чтобы в рамках одного парента можно было свапать чайлдов, если они <= текущего выбранного по прайсу
             //todo 2. аффектить всех открытых чайлдов, чтобы менялся их стэйт доступности
+            
+            //todo для нодов сделать галочку, обозначающую collapsed/expanded state
 
             val textColor: Int
             if (balance - calculateSelected() <= childItem.price) {

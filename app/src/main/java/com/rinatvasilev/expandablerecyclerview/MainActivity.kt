@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.widget.RadioButton
 import com.rinatvasilev.expandablerecyclerview.affectingotherchilds.AffectingOtherChildsFragment
+import com.rinatvasilev.expandablerecyclerview.nodes.NodesFragment
 import com.rinatvasilev.expandablerecyclerview.onlyoneopened.OnlyOneOpenedFragment
 import com.rinatvasilev.expandablerecyclerview.selectable.SelectableFragment
 import com.rinatvasilev.expandablerecyclerview.simple.SimpleFragment
@@ -81,7 +82,7 @@ class MainActivity : AppCompatActivity() {
             SELECTABLE -> SelectableFragment.getInstance()
             ONLY_ONE_OPENED -> OnlyOneOpenedFragment.getInstance()
             AFFECTING_OTHER_CHILDS -> AffectingOtherChildsFragment.getInstance()
-            NODES -> SimpleFragment.getInstance()
+            NODES -> NodesFragment.getInstance()
             else -> SimpleFragment.getInstance()
         }
     }
