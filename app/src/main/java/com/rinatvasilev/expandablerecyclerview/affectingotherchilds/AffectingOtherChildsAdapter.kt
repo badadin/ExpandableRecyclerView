@@ -1,15 +1,18 @@
 package com.rinatvasilev.expandablerecyclerview.affectingotherchilds
 
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.rinatvasilev.expandablerecyclerview.*
 
-class AffectingOtherChildsAdapter(private val itemList: ArrayList<Item>) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var currentOpenedParent: Parent? = null
+class AffectingOtherChildsAdapter(
+    private val balance: Int,
+    private val itemList: ArrayList<Item>,
+    private val selectedListener: (sum: Int) -> Unit
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemCount() = itemList.size
 
@@ -54,23 +57,10 @@ class AffectingOtherChildsAdapter(private val itemList: ArrayList<Item>) :
                     itemList.removeAll(parentItem.childItems)
                     notifyItemRangeRemoved(startPosition, count)
                     parentItem.isExpanded = false
-                    currentOpenedParent = null
                 } else {
                     itemList.addAll(startPosition, parentItem.childItems)
                     notifyItemRangeInserted(startPosition, count)
                     parentItem.isExpanded = true
-
-                    if (currentOpenedParent != null) {
-                        itemList.removeAll(currentOpenedParent!!.childItems)
-                        notifyItemRangeRemoved(
-                            itemList.indexOf(currentOpenedParent!!) + 1,
-                            currentOpenedParent!!.childItems.size
-                        )
-                        currentOpenedParent?.isExpanded = false
-                        notifyItemChanged(itemList.indexOf(currentOpenedParent!!))
-                    }
-
-                    currentOpenedParent = parentItem
                 }
                 updateViewState()
             }
@@ -79,6 +69,7 @@ class AffectingOtherChildsAdapter(private val itemList: ArrayList<Item>) :
         lateinit var parentItem: Parent
 
         private val title: TextView = itemView.findViewById(R.id.title)
+        private val price: TextView = itemView.findViewById(R.id.price)
 
         fun bind() {
             updateViewState()
@@ -87,6 +78,7 @@ class AffectingOtherChildsAdapter(private val itemList: ArrayList<Item>) :
         private fun updateViewState() {
             if (parentItem.selectedChild != null) {
                 title.text = parentItem.selectedChild?.title
+                price.text = parentItem.selectedChild?.price.toString()
                 return
             }
 
@@ -113,15 +105,47 @@ class AffectingOtherChildsAdapter(private val itemList: ArrayList<Item>) :
                 childItem.parent.selectedChild = childItem
 
                 notifyItemChanged(parentPosition)
+
+                selectedListener(calculateSelected())
             }
         }
 
         lateinit var childItem: Child
 
         private val title: TextView = itemView.findViewById(R.id.title)
+        private val price: TextView = itemView.findViewById(R.id.price)
 
         fun bind() {
             title.text = childItem.title
+            price.text = childItem.price.toString()
+
+            //todo доделать
+            //todo 1. чтобы в рамках одного парента можно было свапать чайлдов, если они <= текущего выбранного по прайсу
+            //todo 2. аффектить всех открытых чайлдов, чтобы менялся их стэйт доступности
+
+            val textColor: Int
+            if (balance - calculateSelected() <= childItem.price) {
+                itemView.isEnabled = false
+                textColor = ContextCompat.getColor(itemView.context, R.color.disabled_text)
+            } else {
+                itemView.isEnabled = true
+                textColor = ContextCompat.getColor(itemView.context, R.color.title_text)
+            }
+            title.setTextColor(textColor)
+            price.setTextColor(textColor)
+        }
+
+        private fun calculateSelected(): Int {
+            var sum = 0
+            itemList.forEach { item ->
+                if (item.getItemType() == PARENT) {
+                    val selectedChild = (item as Parent).selectedChild
+                    if (selectedChild != null) {
+                        sum += selectedChild.price
+                    }
+                }
+            }
+            return sum
         }
     }
 }
