@@ -24,6 +24,7 @@
         android:padding="16dp"
         android:textColor="@color/title_text"
         android:textSize="20sp"
+        android:gravity="end"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="price" />

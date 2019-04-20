@@ -105,7 +105,7 @@ class AffectingOtherChildsAdapter(
                 childItem.parent.selectedChild = childItem
 
                 notifyItemChanged(parentPosition)
-
+                updateOpened()
                 selectedListener(calculateSelected())
             }
         }
@@ -119,22 +119,36 @@ class AffectingOtherChildsAdapter(
             title.text = childItem.title
             price.text = childItem.price.toString()
 
-            //todo доделать
-            //todo 1. чтобы в рамках одного парента можно было свапать чайлдов, если они <= текущего выбранного по прайсу
-            //todo 2. аффектить всех открытых чайлдов, чтобы менялся их стэйт доступности
-            
-            //todo для нодов сделать галочку, обозначающую collapsed/expanded state
+            var selected = 0
+            if (childItem.parent.selectedChild != null) {
+                selected = childItem.parent.selectedChild!!.price
+            }
 
             val textColor: Int
-            if (balance - calculateSelected() <= childItem.price) {
-                itemView.isEnabled = false
-                textColor = ContextCompat.getColor(itemView.context, R.color.disabled_text)
-            } else {
+            if (balance - (calculateSelected() - selected) >= childItem.price) {
                 itemView.isEnabled = true
                 textColor = ContextCompat.getColor(itemView.context, R.color.title_text)
+            } else {
+                itemView.isEnabled = false
+                textColor = ContextCompat.getColor(itemView.context, R.color.disabled_text)
             }
+
             title.setTextColor(textColor)
             price.setTextColor(textColor)
+        }
+
+        private fun updateOpened() {
+            itemList.forEach { item ->
+                if (item.getItemType() == PARENT) {
+                    val parent = (item as Parent)
+                    if (parent.isExpanded) {
+                        val parentPosition = itemList.indexOf(parent)
+                        val startPosition = parentPosition + 1
+                        val count = parent.childItems.size
+                        notifyItemRangeChanged(startPosition, count)
+                    }
+                }
+            }
         }
 
         private fun calculateSelected(): Int {
