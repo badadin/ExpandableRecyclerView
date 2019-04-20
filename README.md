@@ -46,7 +46,6 @@ This is a very simple example of how the expandable RecyclerView can be implemen
 <img src="gif/nodes.gif" width="400" />
 
 </br>
-</br>
 
 ## License
 MIT License
