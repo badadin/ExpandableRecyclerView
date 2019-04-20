@@ -6,6 +6,7 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import com.rinatvasilev.expandablerecyclerview.Node
 import com.rinatvasilev.expandablerecyclerview.R
@@ -27,6 +28,7 @@ class NodesAdapter(private val dataset: ArrayList<Node>) : RecyclerView.Adapter<
 
         lateinit var node: Node
         private val text: TextView = itemView.findViewById(R.id.text)
+        private val arrow: ImageView = itemView.findViewById(R.id.arrow)
 
         init {
             itemView.setOnClickListener {
@@ -54,12 +56,30 @@ class NodesAdapter(private val dataset: ArrayList<Node>) : RecyclerView.Adapter<
                     notifyItemRangeInserted(startPosition, count)
                     node.isExpanded = true
                 }
+
+                updateArrow()
             }
         }
 
         fun bind() {
             text.text = "Node: ${node.id}, Level: ${node.nestingLevel}"
             text.setPadding(node.nestingLevel * text.context.dpToPx(16), 0, 0, 0)
+
+            updateArrow()
+
+            if (node.childList.isEmpty()) {
+                arrow.visibility = View.GONE
+            } else {
+                arrow.visibility = View.VISIBLE
+            }
+        }
+
+        private fun updateArrow() {
+            if (node.isExpanded) {
+                arrow.setImageResource(R.drawable.ic_arrow_drop_up)
+            } else {
+                arrow.setImageResource(R.drawable.ic_arrow_drop_down)
+            }
         }
 
         private fun Context.dpToPx(dipValue: Int) =
