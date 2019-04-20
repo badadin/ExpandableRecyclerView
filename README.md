@@ -1,10 +1,51 @@
 ## Summary
-This is a very simple example of how the expandable RecyclerView can be implemented in few lines of code. Take a look on [adapter](https://github.com/badadin/ExpandableRecyclerView/blob/master/app/src/main/java/com/rinatvasilev/expandablerecyclerview/SimpleAdapter.kt) to see how to achieve this functionality.
+These are some examples of adapters from very simple to slightly complicated. The essence is in the adapters code. Ignore the predefined values, please.
 
 <br/>
 
-<img src="animation.gif" width="400" />
+This is a very simple example of how the expandable RecyclerView can be implemented in few lines of code. Take a look on [SimpleAdapter](https://github.com/badadin/ExpandableRecyclerView/blob/master/app/src/main/java/com/rinatvasilev/expandablerecyclerview/simple/SimpleAdapter.kt) to see how to achieve this functionality.
 
+<br/>
+
+<img src="gif/simple.gif" width="400" />
+
+</br>
+</br>
+
+[SelectableAdapter:](https://github.com/badadin/ExpandableRecyclerView/blob/master/app/src/main/java/com/rinatvasilev/expandablerecyclerview/selectable/SelectableAdapter.kt)
+
+<br/>
+
+<img src="gif/selectable.gif" width="400" />
+
+</br>
+</br>
+
+[OnlyOneOpenedAdapter:](https://github.com/badadin/ExpandableRecyclerView/blob/master/app/src/main/java/com/rinatvasilev/expandablerecyclerview/onlyoneopened/OnlyOneOpenedAdapter.kt)
+
+<br/>
+
+<img src="gif/only_one_opened.gif" width="400" />
+
+</br>
+</br>
+
+[AffectingOtherChildrenAdapter:](https://github.com/badadin/ExpandableRecyclerView/blob/master/app/src/main/java/com/rinatvasilev/expandablerecyclerview/affectingotherchildren/AffectingOtherChildrenAdapter.kt)
+
+<br/>
+
+<img src="gif/affecting_other_children.gif" width="400" />
+
+</br>
+</br>
+
+[NodesAdapter:](https://github.com/badadin/ExpandableRecyclerView/blob/master/app/src/main/java/com/rinatvasilev/expandablerecyclerview/nodes/NodesAdapter.kt)
+
+<br/>
+
+<img src="gif/nodes.gif" width="400" />
+
+</br>
 </br>
 
 ## License
