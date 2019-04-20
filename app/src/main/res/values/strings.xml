@@ -3,7 +3,7 @@
     <string name="simple">Simple</string>
     <string name="selectable">Selectable</string>
     <string name="only_one_opened">Only one opened</string>
-    <string name="affecting_other_childs">Affecting other childs</string>
+    <string name="affecting_other_children">Affecting other children</string>
     <string name="available">Available: {0}</string>
     <string name="selected">Selected: {0}</string>
     <string name="nodes">Nodes</string>

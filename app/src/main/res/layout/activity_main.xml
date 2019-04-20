@@ -57,7 +57,7 @@
         android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/affecting_other_childs"
+            android:id="@+id/affecting_other_children"
             android:layout_width="0dp"
             android:layout_height="32dp"
             android:layout_marginEnd="8dp"
@@ -65,7 +65,7 @@
             android:background="@drawable/checkable_background"
             android:button="@null"
             android:gravity="center"
-            android:text="@string/affecting_other_childs"
+            android:text="@string/affecting_other_children"
             android:textColor="@color/title_text"
             android:textSize="18sp" />
 

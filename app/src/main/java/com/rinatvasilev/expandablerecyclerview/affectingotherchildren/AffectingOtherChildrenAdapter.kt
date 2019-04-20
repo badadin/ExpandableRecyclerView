@@ -1,4 +1,4 @@
-package com.rinatvasilev.expandablerecyclerview.affectingotherchilds
+package com.rinatvasilev.expandablerecyclerview.affectingotherchildren
 
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
@@ -8,7 +8,7 @@ import android.widget.TextView
 import com.rinatvasilev.expandablerecyclerview.*
 
 
-class AffectingOtherChildsAdapter(
+class AffectingOtherChildrenAdapter(
     private val balance: Int,
     private val itemList: ArrayList<Item>,
     private val selectedListener: (sum: Int) -> Unit

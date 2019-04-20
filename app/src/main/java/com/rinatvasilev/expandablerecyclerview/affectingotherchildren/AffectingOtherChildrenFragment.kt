@@ -1,4 +1,4 @@
-package com.rinatvasilev.expandablerecyclerview.affectingotherchilds
+package com.rinatvasilev.expandablerecyclerview.affectingotherchildren
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -12,7 +12,7 @@ import com.rinatvasilev.expandablerecyclerview.Item
 import com.rinatvasilev.expandablerecyclerview.Parent
 import com.rinatvasilev.expandablerecyclerview.R
 
-class AffectingOtherChildsFragment : Fragment() {
+class AffectingOtherChildrenFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_list_affecting, container, false)
@@ -26,7 +26,7 @@ class AffectingOtherChildsFragment : Fragment() {
         selected.text = "Selected: 0"
 
         val list = rootView.findViewById<RecyclerView>(R.id.list)
-        list.adapter = AffectingOtherChildsAdapter(
+        list.adapter = AffectingOtherChildrenAdapter(
             balance,
             getPredefinedValues(),
             selectedListener = { sum ->
@@ -71,6 +71,6 @@ class AffectingOtherChildsFragment : Fragment() {
     }
 
     companion object {
-        fun getInstance() = AffectingOtherChildsFragment()
+        fun getInstance() = AffectingOtherChildrenFragment()
     }
 }

@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.widget.RadioButton
-import com.rinatvasilev.expandablerecyclerview.affectingotherchilds.AffectingOtherChildsFragment
+import com.rinatvasilev.expandablerecyclerview.affectingotherchildren.AffectingOtherChildrenFragment
 import com.rinatvasilev.expandablerecyclerview.nodes.NodesFragment
 import com.rinatvasilev.expandablerecyclerview.onlyoneopened.OnlyOneOpenedFragment
 import com.rinatvasilev.expandablerecyclerview.selectable.SelectableFragment
@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var simple: RadioButton
     private lateinit var selectable: RadioButton
     private lateinit var onlyOneOpened: RadioButton
-    private lateinit var affectingOtherChilds: RadioButton
+    private lateinit var affectingOtherChildren: RadioButton
     private lateinit var nodes: RadioButton
 
     private lateinit var radioList: List<RadioButton>
@@ -27,14 +27,14 @@ class MainActivity : AppCompatActivity() {
         simple = findViewById(R.id.simple)
         selectable = findViewById(R.id.selectable)
         onlyOneOpened = findViewById(R.id.only_one_opened)
-        affectingOtherChilds = findViewById(R.id.affecting_other_childs)
+        affectingOtherChildren = findViewById(R.id.affecting_other_children)
         nodes = findViewById(R.id.nodes)
 
         radioList = arrayListOf(
             simple,
             selectable,
             onlyOneOpened,
-            affectingOtherChilds,
+            affectingOtherChildren,
             nodes
         )
 
@@ -56,10 +56,10 @@ class MainActivity : AppCompatActivity() {
             openFragment(ONLY_ONE_OPENED)
         }
 
-        affectingOtherChilds.setOnClickListener {
+        affectingOtherChildren.setOnClickListener {
             resetAllRadioButtons()
-            affectingOtherChilds.isChecked = true
-            openFragment(AFFECTING_OTHER_CHILDS)
+            affectingOtherChildren.isChecked = true
+            openFragment(AFFECTING_OTHER_CHILDREN)
         }
 
         nodes.setOnClickListener {
@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
             SIMPLE -> SimpleFragment.getInstance()
             SELECTABLE -> SelectableFragment.getInstance()
             ONLY_ONE_OPENED -> OnlyOneOpenedFragment.getInstance()
-            AFFECTING_OTHER_CHILDS -> AffectingOtherChildsFragment.getInstance()
+            AFFECTING_OTHER_CHILDREN -> AffectingOtherChildrenFragment.getInstance()
             NODES -> NodesFragment.getInstance()
             else -> SimpleFragment.getInstance()
         }
@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity() {
         private const val SIMPLE = "SIMPLE"
         private const val SELECTABLE = "SELECTABLE"
         private const val ONLY_ONE_OPENED = "ONLY_ONE_OPENED"
-        private const val AFFECTING_OTHER_CHILDS = "AFFECTING_OTHER_CHILDS"
+        private const val AFFECTING_OTHER_CHILDREN = "AFFECTING_OTHER_CHILDREN"
         private const val NODES = "NODES"
     }
 }
